@@ -24,8 +24,14 @@ facility_activities1 = st.text_area("館内での過ごし方1", "ex.赤ちゃ�
 facility_activities2 = st.text_area("館内での過ごし方2", "ex.ラウンジでくつろぎのひととき。ラウンジ前にはビールサーバー、ジュース、アイスクリームを無料で提供")
 
 # 周辺エリアの見どころ
-sightseeing1 = st.text_area("周辺エリアの見どころ1", "ex.つづら棚田。美しく積まれた石垣が印象的な棚田です。")
-sightseeing2 = st.text_area("周辺エリアの見どころ2", "ex.やまんどんの果物農園。7種のいちごや、赤・白・黒系のぶどう、食感の違いを楽しめる梨など果物の品種が豊富な農園です。")
+sightseeing_name1 = st.text_input("周辺エリアの見どころ1：名称", "ex.つづら棚田")
+sightseeing_desc1 = st.text_area("周辺エリアの見どころ1：説明", "ex.美しく積まれた石垣が印象的な棚田です。初秋には金色に輝く稲穂と赤い彼岸花が棚田を彩ります。")
+
+sightseeing_name2 = st.text_input("周辺エリアの見どころ2：名称", "ex.やまんどんの果物農園")
+sightseeing_desc2 = st.text_area("周辺エリアの見どころ2：説明", "ex.7種のいちごや、赤・白・黒系のぶどう、食感の違いを楽しめる梨など果物の品種が豊富な農園です。")
+
+sightseeing_name3 = st.text_input("周辺エリアの見どころ3：名称", "浮羽稲荷神社")
+sightseeing_desc3 = st.text_area("周辺エリアの見どころ3：説明", "山の中腹に建つ神社。赤い鳥居が延々と連なる急な階段が本殿まで続いている。眼下には筑後平野が広がる。")
 
 # 周辺の人気グルメ
 restaurant1 = st.text_area("周辺の人気グルメ1", "ex.cafe たねの隣り。地元の旬の野菜を使ったランチや薬膳カレー、和洋の自家製デザート")
