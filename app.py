@@ -38,26 +38,64 @@ if st.button("生成する"):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # 使用する最新のモデルを指定
         messages=[
-            {"role": "system", "content": "あなたはプロのトラベルライターです。施設紹介文を作成してください。以下のフォーマットに従って、各セクションを分けて出力してください。『{facility_name}へようこそ！』という文章から始めてください。OTAキャッチコピー{ota_copy}を考慮に入れて、更に魅力的なキャッチコピーを{keyword1}、{keyword2}、{keyword3}を基に50文字以内の文章に仕上げてください。この宿の魅力をキーワード{keyword1}、{keyword2}、{keyword3}を基に、それぞれの特徴を詳しく説明するタイトルと文章を3つ作成してください。文章には名称を含めず、タイトルは太字に。館内での過ごし方のキーワード {facility_activities1} 、{facility_activities2}を基に、それぞれの設備やサービスを詳しく説明するタイトルと文章を3つ作成してください。補足情報がある場合は、それを考慮に入れてください。文章には名称を含めず、タイトルは太字に。周辺エリアの見どころは各見どころの名称をそのままタイトルとして使用し、{sightseeing1}{sightseeing2}を基にそれぞれの魅力を詳しく説明する文章を作成してください。文章には名称を含めず、タイトルは太字に。周辺の人気グルメ。各グルメの名称をそのままタイトルとして使用し、{restaurant1}{restaurant2}{restaurant3}を基にそれぞれの料理や雰囲気を詳しく説明する文章を作成してください。文章には名称を含めず、タイトルは太字に。感嘆符は使用せず、トーンとマナーを統一し、簡潔でわかりやすく、かつ読み応えのある内容にしてください。ただし、ウェルカムメッセージには感嘆符を使用します。"},
-            {"role": "user", "content": f"""
-            施設名: {facility_name}
-            キャッチコピー: {ota_copy}
-            : {keyword1}
-            : {keyword2}
-            : {keyword3}
-            館内での過ごし方:
-            - : {facility_activities1}
-            - : {facility_activities2}
-            周辺エリアの見どころ:
-            - : {sightseeing1}
-            - : {sightseeing2}
-            周辺の人気グルメ:
-            - : {restaurant1}
-            - : {restaurant2}
-            - : {restaurant3}
-            """}
-        ]
-    )
+           {"role": "system", "content": f"""
+あなたはプロのトラベルライターです。以下の宿泊施設に関する情報をもとに、魅力を紹介する文章を生成してください。
+
+まずは出力の冒頭に、以下の情報を**タイトル付き（太字）で**明示してください。フォーマットは以下を参考にしてください：
+
+**OTAキャッチコピー**  
+{ota_copy}
+
+**施設名**  
+{facility_name}
+
+**キャッチコピーキーワード1**  
+{keyword1}
+
+**キャッチコピーキーワード2**  
+{keyword2}
+
+**キャッチコピーキーワード3**  
+{keyword3}
+
+**館内での過ごし方1**  
+{facility_activities1}
+
+**館内での過ごし方2**  
+{facility_activities2}
+
+**館内での過ごし方3**  
+（必要に応じて空白でも構いません）
+
+**周辺エリアの見どころ1**  
+{sightseeing1}
+
+**周辺エリアの見どころ2**  
+{sightseeing2}
+
+**周辺エリアの見どころ3**  
+（必要に応じて空白でも構いません）
+
+**周辺の人気グルメ1**  
+{restaurant1}
+
+**周辺の人気グルメ2**  
+{restaurant2}
+
+**周辺の人気グルメ3**  
+{restaurant3}
+
+そのあとに、以下のフォーマットに従って魅力的な紹介文を生成してください。
+
+1. 『{facility_name}へようこそ！』という文章で始めること（ここでは感嘆符使用OK）
+2. OTAキャッチコピーを考慮しつつ、{keyword1}〜{keyword3}を元に、50文字以内の魅力的な1文キャッチコピーを作成
+3. {keyword1}〜{keyword3}をもとに、それぞれの魅力を説明するセクション（タイトルは太字）
+4. {facility_activities1}〜{facility_activities2} を元に館内の魅力セクション（タイトル太字、名称省略）
+5. {sightseeing1}〜{sightseeing2} を使った周辺観光の紹介（タイトルに施設名使用）
+6. {restaurant1}〜{restaurant3} を使ったグルメ紹介（タイトルに店名使用）
+
+全体を通じて感嘆符の多用は避け、トーンは丁寧で、簡潔かつ魅力的にまとめてください。
+"""}
 
     # 結果の生成
     generated_text = response['choices'][0]['message']['content'].strip()
